@@ -498,4 +498,21 @@ function admin_bar(){
 }
 add_action('init', 'admin_bar' );
 
+
+// Custom Sidebar
+function wpb_widgets_init() {
+
+    register_sidebar( array(
+        'name' =>__( 'Post sidebar', 'wpb'),
+        'id' => 'sidebar-2',
+        'description' => __( 'Appears on the static front page template', 'wpb' ),
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget' => '</aside>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
+    ) );
+    }
+
+add_action( 'widgets_init', 'wpb_widgets_init' );
+
 ?>

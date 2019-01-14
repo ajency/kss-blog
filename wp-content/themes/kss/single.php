@@ -99,48 +99,13 @@
 								<!-- <div class="advertise d-flex align-items-center justify-content-center">
 									Advertisement
 								</div> -->
-								<div class="cat-section sidebar-cards">
-									<h5 class="font-weight-bold text-center sidebar-cards__heading">Shop By Categories</h5>
-									<a href="/toys">
-							          <img class="d-block w-100 img-fluid lazyload blur-up"
-							              src="{{CDN::asset('/img/home-category/category_grid7_10px.jpg') }}"
-							              data-srcset="{{CDN::asset('/img/home-category/category_grid7_large.jpg') }} 740w,
-							                            {{CDN::asset('/img/home-category/category_grid7_medium.jpg') }} 370w,
-							                            {{CDN::asset('/img/home-category/category_grid7_small.jpg') }} 246w"
-							              data-sizes='(min-width: 1200px) 370px, (min-width: 768px) and (max-width: 991px) 46vw, (max-width: 992px) 92vw,  31vw'
-							              alt="Woven tops"
-							              title="Woven tops"/>
-							        </a>
-							        <!-- <div class="view-all"><a href="#">View All</a></div> -->
-								</div>
-								<div class="stories-section mt-4 sidebar-cards">
-									<h5 class="font-weight-bold text-center sidebar-cards__heading">Shop By Stories</h5>
-									<a href="/shop?pf=tag:baby-mornings">
-										<img class="d-block w-100 img-fluid lazyload blur-up pb-1"
-							              src="{{CDN::asset('/img/stories/story_grid2_10px.jpg') }}"
-							              data-srcset="{{CDN::asset('/img/stories/story_grid2_large.jpg') }} 740w,
-							                           {{CDN::asset('/img/stories/story_grid2_medium.jpg') }} 370w,
-							                           {{CDN::asset('/img/stories/story_grid2_small.jpg') }} 248w"
-							              data-sizes='(min-width: 1200px) 376px, (min-width: 768px) and (max-width: 991px) 46vw, (max-width: 992px) 90vw,  30vw'
-							              alt="Baby Mornings"
-							              title="Baby Mornings"/>
-							        </a>
-							        <!-- <div class="view-all"><a href="#">View All</a></div> -->
-								</div>
-								<div class="cat-section mt-4 sidebar-cards">
-									<h5 class="font-weight-bold text-center sidebar-cards__heading">Shop By Categories</h5>
-									<a href="/girls/tops--woven-tops">
-							          <img class="d-block w-100 img-fluid lazyload blur-up"
-							              src="{{CDN::asset('/img/home-category/category_grid2_10px.jpg') }}"
-							              data-srcset="{{CDN::asset('/img/home-category/category_grid2_large.jpg') }} 740w,
-							                            {{CDN::asset('/img/home-category/category_grid2_medium.jpg') }} 370w,
-							                            {{CDN::asset('/img/home-category/category_grid2_small.jpg') }} 246w"
-							              data-sizes='(min-width: 1200px) 370px, (min-width: 768px) and (max-width: 991px) 46vw, (max-width: 992px) 92vw,  31vw'
-							              alt="Woven tops"
-							              title="Woven tops"/>
-							        </a>
-							        <!-- <div class="view-all"><a href="#">View All</a></div> -->
-								</div>
+
+								<?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
+								    <div id="secondary" class="widget-area" role="complementary">
+								    <?php dynamic_sidebar( 'sidebar-2' ); ?>
+								    </div>
+								<?php endif; ?>
+
 							</div>
 						</div>
 					</div>

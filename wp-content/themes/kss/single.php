@@ -6,6 +6,9 @@
 
 	<?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
+	<!-- Track views -->
+	<?php wpb_set_post_views(get_the_ID()); ?>
+
 		<!-- article -->
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<section class="single-blog">
@@ -33,7 +36,12 @@
 										endif; ?>
 
 										<p class="bl-single-caption row-spacer">
-											<?php echo wp_strip_all_tags( get_the_excerpt(), true ); ?>
+											<?php
+											if ( has_excerpt( $post->ID ) ) {
+											    // This post has excerpt
+												echo wp_strip_all_tags( get_the_excerpt(), true );
+											}
+											?>
 										</p>
 										<div class="d-flex flex-column flex-sm-row mb-1 mr-2 post-tags pr-2 mt-2">
 											<div class="post-tags mb-1 d-flex">
@@ -149,7 +157,15 @@
 												<div class="kss-posts__content">
 													<h1 class="bl-single-heading bl-single-heading--small"><?php the_title(); ?></h1>
 													<p class="bl-single-caption bl-single-caption--small">
-														<?php echo wp_strip_all_tags( get_the_excerpt(), true ); ?>
+														<?php
+														if ( has_excerpt( $post->ID ) ) {
+														    // This post has excerpt
+															echo wp_strip_all_tags( get_the_excerpt(), true );
+														} else {
+														    // This post has no excerpt
+															echo wp_trim_words( get_the_content(), 12 );
+														}
+														?>
 													</p>
 													<div class="flex-sm-row mb-1 mr-2 post-tags">
 														<div class="post-tags mb-1 d-flex">

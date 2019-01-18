@@ -543,4 +543,76 @@ function wpb_set_post_views($postID) {
 //To keep the count accurate, lets get rid of prefetching
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 
+// Recent posts Shortcode
+function my_recent_posts_shortcode($atts){
+    $q = new WP_Query(
+       array( 'orderby' => 'date', 'posts_per_page' => '4')
+    );
+
+    $list = '<div class="recent-post"><div class="recent-post__heading">Recent Posts</div>';
+
+    while($q->have_posts()) : $q->the_post();
+        $categories = get_the_category();
+        $separator = ' ';
+        $output = '';
+        if ( ! empty( $categories ) ) {
+            foreach( $categories as $category ) {
+                $output .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '" alt="' . esc_attr( sprintf( __( 'View all posts in %s', 'textdomain' ), $category->name ) ) . '"><span>' . esc_html( $category->name ) . '</span></a>' . $separator;
+            }
+        }
+        $list .= '<div class="recent-post__box"><a href="' . get_permalink() . '"><h2 class="recent-post__title">' . get_the_title() . '</h2></a>' . '<div class="post-tags mb-1 d-flex"><div class="post-tags__data">' . trim( $output, $separator ) . '</div></div></div>';
+    endwhile;
+
+    wp_reset_query();
+
+    return $list . '</div>';
+}
+add_shortcode('kss-recent-posts', 'my_recent_posts_shortcode');
+
+// Featured posts Shortcode
+function my_featured_posts_shortcode($atts){
+    $query = new WP_Query(
+       array( 'posts_per_page' => '1', 'meta_key' => 'meta-checkbox', 'meta_value' => 'yes')
+    );
+
+    $content = '<div class="featured-section__col cover-post"><div class="featured-post">';
+
+    while($query->have_posts()) : $query->the_post();
+
+        $thumbnail = the_post_thumbnail('large', array('class' => 'd-block w-100 img-fluid cover-img'));
+
+        $categories = get_the_category();
+        $link = get_permalink();
+        $title = get_the_title();
+        $excerpt = the_excerpt();
+        $separator = ' ';
+        $cat = '';
+        if ( ! empty( $categories ) ) {
+            foreach( $categories as $category ) {
+                $cat .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '" alt="' . esc_attr( sprintf( __( 'View all posts in %s', 'textdomain' ), $category->name ) ) . '"><span>' . esc_html( $category->name ) . '</span></a>' . $separator;
+                $cats = trim( $cat, $separator );
+            }
+        }
+        $content .= '<div class="featured-post__cover">';
+        $content .= '<a href="' .$link . '" class="d-block">'. $thumbnail .'</a>';
+        $content .= '</div>';
+        $content .= '<div class="post-content">';
+        $content .= '<a href="' . $link . '" class="d-block">';
+        $content .= '<h1 class="featured-post__title">' . $title .'</h1>';
+        $content .= '<p class="featured-post__desc">' . $excerpt .'</p>';
+        $content .= '</a>';
+        $content .= '<div class="post-content__links">';
+        $content .= '<div class="post-tags mb-1 d-flex">';
+        $content .= '<div class="post-tags__data">'. $cats .'</div>';
+        $content .= '</div>';
+        $content .= '</div>';
+        $content .= '</div>';
+    endwhile;
+
+    wp_reset_query();
+
+    return $content . '</div></div>';
+}
+add_shortcode('kss-featured-posts', 'my_featured_posts_shortcode');
+
 ?>

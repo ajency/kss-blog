@@ -166,7 +166,7 @@
 
 		<!-- 3 column layout -->
 
-		<section class="random-posts my-4 py-4">
+		<section class="random-posts mt-4 mb-2 py-4">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
@@ -248,18 +248,19 @@
 
 		<!-- Section with sidebar -->
 
-		<section class="blog-ls mt-4 pt-4">
+		<section class="pt-3">
 			<div class="container">
+				<hr class="mb-4">
 				<div class="row">
-					<div class="col-sm-12 mt-4">
-						<div class="text-center text-lg-left">
-							<h1 class="border-header">
-								Trending On KidSuperStore
-							</h1>
-						</div>
-					</div>
 					<div class="col-lg-8">
-						<div class="blog-col mt-4">
+						<div class="mt-4">
+							<div class="text-center text-lg-left">
+								<h1 class="border-header">
+									Trending On KidSuperStore
+								</h1>
+							</div>
+						</div>
+						<div class="blog-col mt-3">
 						<?php
 						$popularpost = new WP_Query( array( 'posts_per_page' => 4, 'meta_key' => 'wpb_post_views_count', 'orderby' => 'meta_value_num', 'order' => 'DESC'  ) );
 						while ( $popularpost->have_posts() ) : $popularpost->the_post(); ?>
@@ -278,7 +279,7 @@
 													echo wp_strip_all_tags( get_the_excerpt(), true );
 												} else {
 												    // This post has no excerpt
-													echo wp_trim_words( get_the_content(), 12 );
+													echo wp_trim_words( get_the_content(), 18 );
 												}
 												?>
 											</p>
@@ -306,7 +307,7 @@
 						<?php endwhile;?>
 						</div>
 					</div>
-					<div class="col-sm-4 mt-3 d-none d-lg-block">
+					<div class="col-sm-4 mt-4 d-none d-lg-block">
 						<div class="blog-sidebar">
 							<div class="newsletter mb-4 d-none">
 								<div class="blog-sidebar__header">
@@ -322,10 +323,12 @@
 									</div>
 								</div>
 							</div>
-							<div class="c-popular mb-4 pb-3">
-								<div class="blog-sidebar__header">
-									Popular Posts
-								</div>
+							<div class="c-popular mb-4">
+								<div class="text-center text-lg-left">
+					                <h1 class="border-header">
+					                  Popular Posts
+					                </h1>
+					            </div>
 								<ul class="c-popular__lists">
 									<li class="d-flex">
 										<span class="c-popular__index pr-3">01</span>
@@ -366,10 +369,101 @@
 				</div>
 			</div>
 		</section>
+<?php
+				/*
+		<!-- Blogs section for site homepage -->
+		<section class="blog-section">
+		  	<div class="container">
+			    <div class="row">
+			        <div class="col-md-12 text-center">
+			          <h2 class="font-weight-bold mb-4 pb-2">Blogs</h2>
+			        </div>
+			    </div>
+				<div class="blog-articles d-flex flex-column flex-lg-row">
+					<!-- Recent articles -->
+					<div class="blog-articles__recent order-1 order-lg-0">
+
+						<?php echo do_shortcode( '[kss-recent-posts]' ); ?>
+
+					</div>
+					<!-- Featured articles -->
+					<div class="blog-articles__featured order-0 order-lg-1">
+
+						<div class="featured-section">
+							<?php echo do_shortcode( '[kss-featured-posts]' ); ?>
+							<div class="d-flex flex-column flex-md-row no-cover-post">
+								<div class="featured-section__col">
+									<div class="featured-post">
+										<div class="featured-post__cover">
+											<a href="#" class="d-block">
+												<img class="d-block w-100 img-fluid lazyload blur-up cover-img"
+												     src="{{CDN::asset('/img/stories/story_grid2_10px.jpg') }}"
+												     data-srcset="{{CDN::asset('/img/stories/story_grid2_medium.jpg') }}"
+												     title=""
+												     alt=""/>
+											</a>
+										</div>
+										<div class="post-content">
+											<a href="#" class="d-block text-black">
+												<h1 class="featured-post__title">
+													Stylish clothes for your stylish kids only on KidSuperStore.
+												</h1>
+												<p class="featured-post__desc">
+													Lorem ipsum dolor sit amet, consec adipisicing elit. Sed sunt et doloremque eligendi deleniti ab quos est earum tempora natus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed sunt et doloremque eligendi deleniti ab quos est earum tempora natus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed sunt et doloremque eligendi deleniti ab quos est earum tempora natus!
+												</p>
+											</a>
+											<div class="post-content__links">
+												<div class="post-tags mb-1 d-flex">
+													<div class="post-tags__data">
+														<a href="#"><span>Baby-Mornings</span></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="featured-section__col">
+									<div class="featured-post">
+										<div class="featured-post__cover">
+											<a href="#" class="d-block">
+												<img class="d-block w-100 img-fluid lazyload blur-up cover-img"
+												     src="{{CDN::asset('/img/home-category/category_grid13_10px.jpg') }}"
+												     data-srcset="{{CDN::asset('/img/home-category/category_grid13_medium.jpg') }}"
+												     title=""
+												     alt=""/>
+											</a>
+										</div>
+										<div class="post-content">
+											<a href="#" class="d-block text-black">
+												<h1 class="featured-post__title">
+													New Year super sale - FLAT 50% OFF on selected merchandise.
+												</h1>
+												<p class="featured-post__desc">
+													Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed sunt et doloremque eligendi deleniti ab quos est earum tempora natus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed sunt et doloremque eligendi deleniti ab quos est earum tempora natus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed sunt et doloremque eligendi deleniti ab quos est earum tempora natus!
+												</p>
+											</a>
+											<div class="post-content__links">
+												<div class="post-tags mb-1 d-flex">
+													<div class="post-tags__data">
+														<a href="#"><span>Super Sale</span></a><a href="#"><span>50% OFF</span></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+*/
+			?>
 
 		<!-- section -->
 		<section>
-
 
 			<?php
 				/* get_template_part('loop'); */
